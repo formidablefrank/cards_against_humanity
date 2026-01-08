@@ -3,3 +3,8 @@
 :queues:
   - default
   - rollbar
+:schedule:
+  delete_old_games:
+    cron: "0 * * * *"
+    class: "DeleteOldGamesWorker"
+    queue: default

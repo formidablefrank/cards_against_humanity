@@ -3,7 +3,7 @@
 namespace :db do
   desc 'Deletes old games'
   task delete_old_games: :environment do
-    expiration = 1.day
+    expiration = ENV.fetch('CURRENT_GAMES_WINDOW_HOURS', 1).to_i.hours
 
     Game.find_each do |game|
       ended_at = game.rounds.last.updated_at
