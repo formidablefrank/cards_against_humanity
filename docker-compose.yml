@@ -16,6 +16,9 @@ services:
       RAILS_MIN_THREADS: 1
       RAILS_MAX_THREADS: 2
       WEB_CONCURRENCY: 2
+      CARDS_PER_PLAYER: 10
+      CURRENT_GAMES_LIMIT: 10
+      CURRENT_GAMES_WINDOW_HOURS: 1
     volumes:
       - .:/app
       - node_modules:/app/node_modules
@@ -23,7 +26,7 @@ services:
       resources:
         limits:
           cpus: 1.0     # 100% of 1 core (1.0 cores)
-          memory: 1G  # Max RAM
+          memory: 1G    # Max RAM
     networks:
       - cah_network
     depends_on:

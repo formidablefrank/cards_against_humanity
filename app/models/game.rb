@@ -3,7 +3,9 @@
 class Game < ApplicationRecord
   class TooManyCardsError < StandardError; end
 
-  CARDS_PER_PLAYER = 10
+  CARDS_PER_PLAYER = ENV.fetch('CARDS_PER_PLAYER', 10).to_i
+  CURRENT_GAMES_LIMIT = ENV.fetch('CURRENT_GAMES_LIMIT', 50).to_i
+  CURRENT_GAMES_WINDOW_HOURS = ENV.fetch('CURRENT_GAMES_WINDOW_HOURS', 1).to_i
 
   has_many :players, -> { order(:position) }
 
@@ -14,6 +16,7 @@ class Game < ApplicationRecord
   has_many :options, dependent: :destroy
 
   before_create :set_slug
+  validate :current_games_limit_not_reached, on: :create
 
   def to_param
     slug
@@ -116,5 +119,19 @@ class Game < ApplicationRecord
 
   def set_slug
     self.slug = SecureRandom.alphanumeric(5).upcase
+  end
+
+  def current_games_limit_not_reached
+    current_games_count = Game
+      .where('max_players > 1')
+      .where('updated_at >= ?', CURRENT_GAMES_WINDOW_HOURS.hours.ago)
+      .count
+
+    return if current_games_count < CURRENT_GAMES_LIMIT
+
+    errors.add(
+      :base,
+      "Current number of games has been reached. Please try again after #{CURRENT_GAMES_WINDOW_HOURS} hour(s)."
+    )
   end
 end
