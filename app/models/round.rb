@@ -50,8 +50,10 @@ class Round < ApplicationRecord
   delegate :broadcast_refresh, to: :game
 
   def pick_new_black_card
+    new_black_card = game.deck.black.first
+    return false if new_black_card.blank?
+
     transaction do
-      new_black_card = game.deck.black.first
       update!(black_card: new_black_card)
 
       # Remove card from the deck

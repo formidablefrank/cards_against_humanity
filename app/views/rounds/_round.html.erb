@@ -1,5 +1,17 @@
 <div id="round">
-  <% if @round.ended? %>
+  <% if @game_over %>
+    <p>The game has ended.</p>
+
+    <% if @game_winner %>
+      <p>
+        Highest score:
+        <strong><%= @game_winner %></strong>
+        with <%= @game_winner_score %> point<%= @game_winner_score == 1 ? '' : 's' %>.
+      </p>
+    <% else %>
+      <p>No winner this time.</p>
+    <% end %>
+  <% elsif @round.ended? %>
     <p>And the winner is…</p>
 
     <% if @winning_submission %>

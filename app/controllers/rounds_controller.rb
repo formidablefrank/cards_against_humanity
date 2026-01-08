@@ -19,8 +19,13 @@ class RoundsController < ApplicationController
     @submission = @current_player.submissions.find_by(round: @round)
     @submissions = @round.submissions.includes(:card)
     @scores = @game.scores
+    @game_over = @round.ended? && !@game.black_cards_remaining?
+    if @game_over
+      @game_winner = @game.players.max_by { |player| @scores[player.id] }
+      @game_winner_score = @scores[@game_winner.id] if @game_winner
+    end
 
-    @winning_submission = @round.submissions.winning.first if @round.ended?
+    @winning_submission = @round.submissions.winning.first if @round.ended? && !@game_over
   end
 
   # POST /games/1/round
@@ -35,7 +40,11 @@ class RoundsController < ApplicationController
   def advance
     case @round.status.to_sym
     when Round::STATE_STARTING
-      @round.pick_black_card!
+      if @game.black_cards_remaining?
+        @round.pick_black_card!
+      else
+        @round.force_end!
+      end
     when Round::STATE_PICKING_BLACK_CARD
       @round.play_black_card!
     when Round::STATE_PLAYING_BLACK_CARD
@@ -63,7 +72,7 @@ class RoundsController < ApplicationController
 
   # POST /games/1/round/skip_black_card
   def skip_black_card
-    @round.pick_new_black_card
+    @round.force_end! unless @round.pick_new_black_card
 
     redirect_to game_round_path(@game)
   end

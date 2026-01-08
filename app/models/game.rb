@@ -23,6 +23,10 @@ class Game < ApplicationRecord
     Card.random.where.not(id: used_cards)
   end
 
+  def black_cards_remaining?
+    Card.black.where.not(id: used_cards).exists?
+  end
+
   def current_round
     rounds.last
   end
