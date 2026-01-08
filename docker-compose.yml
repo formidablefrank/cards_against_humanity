@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    command: bundle exec rails server -b 0.0.0.0
+    command: bundle exec puma -C config/puma.rb
     ports:
       - "3000:3000"
     environment:
@@ -11,6 +11,9 @@ services:
       REDIS_URL: ${REDIS_URL}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_MIN_THREADS: 1
+      RAILS_MAX_THREADS: 4
+      WEB_CONCURRENCY: 1
     volumes:
       - .:/app
       - node_modules:/app/node_modules
@@ -26,6 +29,9 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       REDIS_URL: ${REDIS_URL}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      RAILS_MIN_THREADS: 1
+      RAILS_MAX_THREADS: 4
+      WEB_CONCURRENCY: 1
     volumes:
       - .:/app
       - node_modules:/app/node_modules
