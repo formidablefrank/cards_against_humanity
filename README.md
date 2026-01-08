@@ -45,6 +45,43 @@ $ foreman start web=1,worker=1
 
 5. Open a browser to [http://localhost:3000](http://localhost:3000)
 
+## Docker setup
+
+This repo includes a `Dockerfile` and `docker-compose.yml` for local development.
+
+1. Build the images:
+
+```sh
+docker compose build --no-cache
+```
+
+2. Edit the environment variables:
+
+```sh
+cp .env.example .env
+vim .env
+```
+
+3. Precompile assets the create, migrate, and seed the database:
+
+```sh
+docker compose --env-file .env run --rm web bundle exec rails db:create db:migrate db:seed assets:precompile
+```
+
+4. Start the web and background worker services with your `.env` file:
+
+```sh
+docker compose --env-file .env up
+```
+
+4. On your browser, go to [http://localhost:3000](http://localhost:3000)
+
+5. To stop the containers:
+
+```sh
+docker compose down -v
+```
+
 ## Running the test suite
 
 ```sh

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
-
+ActiveRecord::Schema[7.0].define(version: 2020_04_12_172021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,8 +19,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
     t.bigint "game_id", null: false
     t.boolean "used", default: false
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_card_games_on_card_id"
     t.index ["game_id"], name: "index_card_games_on_game_id"
   end
@@ -30,8 +29,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
     t.bigint "card_id", null: false
     t.bigint "player_id", null: false
     t.integer "position", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_card_players_on_card_id"
     t.index ["player_id"], name: "index_card_players_on_player_id"
   end
@@ -39,8 +38,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
   create_table "cards", force: :cascade do |t|
     t.string "type", null: false
     t.string "text", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "pack_id", null: false
     t.integer "pick"
     t.index ["pack_id"], name: "index_cards_on_pack_id"
@@ -49,8 +48,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
 
   create_table "games", force: :cascade do |t|
     t.string "slug", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "max_players", default: 0, null: false
     t.index ["slug"], name: "index_games_on_slug", unique: true
   end
@@ -58,15 +57,15 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
   create_table "options", force: :cascade do |t|
     t.string "code"
     t.bigint "game_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_options_on_game_id"
   end
 
   create_table "packs", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "players", force: :cascade do |t|
@@ -74,8 +73,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
     t.string "token", null: false
     t.integer "position"
     t.bigint "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "random_seed"
     t.boolean "rando", default: false
     t.boolean "expand_hand", default: false
@@ -89,8 +88,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
     t.integer "position", null: false
     t.integer "czar_id"
     t.integer "black_card_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_rounds_on_game_id"
   end
 
@@ -100,8 +99,8 @@ ActiveRecord::Schema[6.1].define(version: 2020_04_12_172021) do
     t.bigint "card_id", null: false
     t.boolean "won", default: false, null: false
     t.integer "position", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_submissions_on_card_id"
     t.index ["player_id"], name: "index_submissions_on_player_id"
     t.index ["round_id"], name: "index_submissions_on_round_id"
