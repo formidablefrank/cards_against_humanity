@@ -26,6 +26,7 @@ gem 'redis'
 gem 'rollbar'
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.4'
 
