@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    command: bundle exec puma -C config/puma.rb
+    command: bundle exec rails server -b 0.0.0.0
     ports:
       - 3000:3000
     environment:
