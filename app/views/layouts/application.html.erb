@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cardigans Humility.online</title>
+    <title>Cards Against Filipinos Online</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,7 +14,7 @@
 
   <body>
     <nav class="navbar">
-      <a class="navbar-brand" href="/">Cardigans Humility.online</a>
+      <a class="navbar-brand" href="/">🃏 Cards Against Filipinos</a>
     </nav>
 
     <main role="main">
@@ -24,20 +24,6 @@
     <footer class="container small text-muted text-center">
       <div class='divider'></div>
       <p>
-        Put together by
-        <a href='http://kevinbongart.net'>Kevin Bongart</a>
-        so he could play his beloved game with friends during tough times.
-
-        Not affiliated with the official
-        <a href="https://cardsagainsthumanity.com">Cards Against Humanity</a>
-        company, but you should absolutely
-        <a href='https://store.cardsagainsthumanity.com'>buy their game</a> because it's a lot more fun in person.
-
-        Remixed under
-        <a href='https://creativecommons.org/licenses/by-nc-sa/2.0/'>Creative Commons BY-NC-SA 2.0 license</a>.
-
-        <a href="https://github.com/KevinBongart/cards_against_humanity">Check out the source code on GitHub</a>.
-
         <% if @current_player %>
           <%= link_to 'Click here to sign out',
             @current_player,
@@ -45,6 +31,23 @@
             data: { confirm: 'Are you sure you want to sign out?' }
           %>.
         <% end %>
+      </p>
+      <p>
+        Put together by
+        <a href="https://kevinbongart.net" target="_blank">Kevin Bongart</a>
+        so he could play his beloved game with friends during tough times.
+
+        Not affiliated with the official
+        <a href="https://cardsagainsthumanity.com" target="_blank">Cards Against Humanity</a>
+        company, but you should absolutely
+        <a href="https://store.cardsagainsthumanity.com" target="_blank">buy their game</a> because it is a lot more fun in person.
+
+        Remixed under
+        <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/" target="_blank">Creative Commons BY-NC-SA 2.0 license</a>.
+      </p>
+      <p>
+        Customized by <a href="https://linktr.ee/formidablefrank" target="_blank">J Franco Ray</a>.
+        Check out the <a href="https://github.com/formidablefrank/cards_against_humanity/tree/dev" target="_blank">source code on GitHub</a>.
       </p>
     </footer>
   </body>
