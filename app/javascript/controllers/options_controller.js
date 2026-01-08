@@ -8,8 +8,8 @@ export default class extends Controller {
     event.preventDefault()
 
     var showClass    = "show"
-    var expandText   = "Click here for additional options"
-    var collapseText = "Hide options"
+    var expandText   = "⚙️ Click here for additional options"
+    var collapseText = "🫣 Hide options"
 
     if (this.listTarget.classList.contains(showClass)) {
       this.linkTarget.innerHTML = expandText
